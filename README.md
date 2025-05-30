@@ -1,6 +1,6 @@
-# 🍳 Recipe 최고 가장한 App
+# 🍳 Recipe App
 
-**냉장고 속 재료로 무엇을 만들지 고민될 때, AI가 추천해주는 레시피 앱!**
+**냉장고 속 재료로 무엇을 만들지 고민될 때, AI가 추천해주는 레시피 웹**
 
 ---
 
@@ -61,7 +61,7 @@
 
 ## 🗂️ ERD
 
-![ERD](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcibtAM%2FbtsNnn64cGg%2FIdXO32kEQJAgSpfePvrQ40%2Fimg.png)
+![ERD](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbrRfyq%2FbtsOlwW7VkN%2Faa0Seaby3IegvhVuk9Jt3K%2Fimg.png)
 
 ---
 
