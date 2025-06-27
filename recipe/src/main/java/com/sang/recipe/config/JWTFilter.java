@@ -25,7 +25,6 @@ public class JWTFilter extends OncePerRequestFilter {
         this.jwtUtil = jwtUtil;
     }
 
-    // protected : 상속받은 자식 클래스에서만 접근 가능
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 				
@@ -78,7 +77,7 @@ public class JWTFilter extends OncePerRequestFilter {
         PrincipalDetail customUserDetails = new PrincipalDetail(user);
 
 		// 스프링 시큐리티 인증 토큰 생성 (인증자 정보, 비밀번호 정보, 사용자 권한 목록)
-        Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+        Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, token, customUserDetails.getAuthorities());
 		//세션에 사용자 등록
         SecurityContextHolder.getContext().setAuthentication(authToken);
 

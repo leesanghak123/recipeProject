@@ -1,11 +1,8 @@
 package com.sang.recipe.config;
 
-import java.util.Collections;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.session.RedisSessionProperties.ConfigureAction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,12 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.server.ServerWebExchange;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
 @EnableWebSecurity // 시큐리티를 위한 config라는 뜻
@@ -46,17 +38,17 @@ public class SecurityConfig {
 	
 	// 위의 코드 수정
 	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 	    return this.authenticationConfiguration.getAuthenticationManager();
 	}
 
 	@Bean // IoC가 되요!!
-	public BCryptPasswordEncoder encodePWD() {
+	BCryptPasswordEncoder encodePWD() {
 		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		// 세션으로 구현 시 세션이 고정되기 때문에 csrf를 허용해야한다
 		// jwt를 이용한 stateless 방식을 사용하기 때문에 csrf 공격을 방어하지 않아도 된다
@@ -74,6 +66,7 @@ public class SecurityConfig {
 		// 인증 주소 설정 (WEB-INF/** 추가해줘야 함. 아니면 인증이 필요한 주소로 무한 리다이렉션 일어남)
 		http.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/auth/**").permitAll()
+				.requestMatchers("/api/ai/**").permitAll()
 				.requestMatchers("/admin").hasRole("ADMIN") // ADMIN만 갈 수 있는 경로
 				.anyRequest().authenticated()); // 위의 경로 빼고는 다 인증이 필요
 

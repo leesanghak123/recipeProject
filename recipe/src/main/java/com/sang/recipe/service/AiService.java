@@ -1,12 +1,9 @@
 package com.sang.recipe.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.sang.recipe.config.auth.PrincipalDetail;
 import com.sang.recipe.dto.AiRequest;
 import com.sang.recipe.dto.AiResponse;
 
@@ -14,41 +11,40 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class AiService {
-	// 외부 API와 HTTP 요청을 통해 통신하는 클라이언트, 클래스 내부에서만 접근 가능
-	private final WebClient webClient;
 
-	// WebClient.Builder(Bean으로 등록되어 있음)를 webClient에 할당
-	// WebClient.Builder는 메뉴판, webClient는 메뉴라고 생각하면 된다
-    @Autowired
-    public AiService(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8000").build();  // FastAPI 서버 주소
+    private final WebClient webClient;
+
+    public AiService(WebClient webClient) {
+        this.webClient = webClient;
     }
 
-    public AiResponse ai요리(AiRequest request) {
-        // FastAPI로 요청 보내기
-    	// Mono: 비동기 처리
-    	Mono<String> fastApiResponse = this.webClient.post()
-                .uri("/api/question") // fastapi 질문 하는 api
-                .bodyValue(request) // requestDto
-                .retrieve() // 200인 경우 반환, 아닌 경우 예외처리
-                .bodyToMono(String.class); // 응답 데이터 String으로 변환
+    public Mono<AiResponse> ai요리(AiRequest request, PrincipalDetail principalDetail) {
+        System.out.println("[ai요리 시작] Thread: " + Thread.currentThread().getName());
+        System.out.println("[ai요리 시작] 사용자: " + (principalDetail != null ? principalDetail.getUsername() : "없음"));
 
-    	// FastAPI에서 받은 String 값을 이용하여 AiResponse 객체 생성
-        String responseContent = fastApiResponse.block(); // 비동기 처리를 동기적으로 대기(값을 받을 때까지 대기)
-    	
-        // 로그 찍기 (응답 값 확인)
-        if (responseContent == null) {
-            System.out.println("FastAPI response is null");
-        } else {
-            System.out.println("FastAPI response content: " + responseContent);
-        }
-        
-        // 요청 받은 데이터와 함께 응답을 결합하여 AiResponse 생성
-        return new AiResponse(
-            request.getCookingMethod(), // request에서 값 가져오기
-            request.getCookingCategory(),
-            request.getIngredients(),
-            responseContent != null ? responseContent : "응답 내용이 없습니다."
-        );
+        return this.webClient.post()
+            .uri("/api/question")
+            .bodyValue(request)
+            .retrieve() // 실제 요청 응답 처리
+            .bodyToMono(String.class) // 응답 String 타입을 Mono<String>으로 감싸기
+            .doOnNext(content -> {
+                System.out.println("[FastAPI 응답 도착] Thread: " + Thread.currentThread().getName());
+                System.out.println("[FastAPI 응답 내용] " + content);
+            })
+            .map(responseContent -> new AiResponse( // 응답을 AiResponse 객체로 변환
+                request.getCookingMethod(),
+                request.getCookingCategory(),
+                request.getIngredients(),
+                responseContent != null ? responseContent : "나중에 다시 시도해주세요."
+            ))
+            .onErrorResume(error -> {
+                System.err.println("[WebClient 오류] " + error.getMessage());
+                return Mono.just(new AiResponse(
+                    request.getCookingMethod(),
+                    request.getCookingCategory(),
+                    request.getIngredients(),
+                    "AI 응답 중 오류가 발생했습니다."
+                ));
+            });
     }
 }

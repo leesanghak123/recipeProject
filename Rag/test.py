@@ -4,10 +4,12 @@ from langchain_community.vectorstores import FAISS
 from langchain_core.output_parsers import StrOutputParser # LLM으로 부터 나온 응답을 단순 문자열로 변환
 from langchain_core.runnables import RunnablePassthrough # 내가 실제로 한 질문 (Rag X)
 from langchain_core.prompts import PromptTemplate # 프롬프트(LLM에게 특정 역할 부여)
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings # 언어모델, 임베딩을 OPEN AI 사 이용
+#from langchain_openai import ChatOpenAI, OpenAIEmbeddings # 언어모델, 임베딩을 OPEN AI 사 이용
+from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings # 언어모델, 임베딩을 Google 사 이용
 from langchain.docstore.document import Document # 문서형태로 저장하기 위함
 from dotenv import load_dotenv # 환경변수 로드(.env)
 import os # 환경변수 접근
+import asyncio
 import logging 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -15,6 +17,7 @@ from pydantic import BaseModel
 # 환경 변수 로드
 load_dotenv() # ()안에는 경로를 작성(현재 루트 디렉토리라서 경로는 생략)
 openai_api_key = os.getenv("OPENAI_API_KEY")
+google_api_key = os.getenv("GOOGLE_API_KEY")
 
 app = FastAPI()
 
@@ -56,7 +59,7 @@ docs = [
 split_documents = docs
 
 # 단계 3: 임베딩(Embedding) 생성
-embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=google_api_key)
 
 # 단계 4: DB 생성(Create DB) 및 저장 (FAISS 사용)
 # 분할된 문서와, 임베딩 모델을 통한 DB 생성
@@ -83,7 +86,7 @@ Answer in Korean.
 )
 
 # 단계 7: 언어모델(LLM) 생성
-llm = ChatOpenAI(model_name="gpt-4o-mini", openai_api_key=openai_api_key, temperature=0)
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=google_api_key, temperature=0)
 
 # 단계 8: 체인(Chain) 생성
 chain = (
@@ -106,8 +109,11 @@ async def ai_service(request: AiRequest):
 
     # LangChain 실행
     try:
-        response_content = chain.invoke(question)  # 앞서 생성한 chain 실행
+        response_content = await asyncio.wait_for(chain.ainvoke(question), timeout=30.0)  # 앞서 생성한 chain 실행, 30초 이내 반환(장애전파 방지)
         return response_content  # 문자열로만 반환
+    except asyncio.TimeoutError:
+        logger.error(f"LLM chain execution timed out after 30 seconds for question: {question}")
+        raise HTTPException(status_code=504, detail="요리 추천 서비스 응답이 지연되고 있습니다. 잠시 후 다시 시도해 주세요.")
     except Exception as e:
         logger.error(f"Error occurred while processing the request: {e}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
+        raise HTTPException(status_code=500, detail="요리 추천 서비스에 일시적인 오류가 발생했습니다. 나중에 다시 이용해 주세요.")

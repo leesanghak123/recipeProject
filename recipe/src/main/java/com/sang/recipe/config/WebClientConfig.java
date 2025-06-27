@@ -8,9 +8,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration // 스프링의 설정 클래스
 public class WebClientConfig {
 
-	// WebClient 생성 (@Autowired로 사용가능)
+	// @Autowired로 사용 가능
     @Bean
-    public WebClient.Builder webClientBuilder() {
-        return WebClient.builder();
+    WebClient webClient(WebClient.Builder builder) {
+        return builder.baseUrl("http://localhost:8000").build();
     }
 }
