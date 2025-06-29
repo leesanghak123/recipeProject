@@ -55,13 +55,13 @@
 
 ## 🧱 아키텍처 구성
 
-![architecture](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FsD6d6%2FbtsNlW4GgCc%2FR9VRHMBtsEO7UOJgiqKC2K%2Fimg.png)
+![architecture](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FZR2TA%2FbtsOXHKaAl6%2FAAAAAAAAAAAAAAAAAAAAAAw66iz48vwpqc0i_vDUxpHEe0uPc7CVqFwDfbSttlUD%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DiZE1dQiqQlizRRRwP3MWNQiB6fA%253D)
 
 ---
 
 ## 🗂️ ERD
 
-![ERD](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FZR2TA%2FbtsOXHKaAl6%2FAAAAAAAAAAAAAAAAAAAAAAw66iz48vwpqc0i_vDUxpHEe0uPc7CVqFwDfbSttlUD%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DiZE1dQiqQlizRRRwP3MWNQiB6fA%253D.png)
+![ERD](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbrRfyq%2FbtsOlwW7VkN%2FAAAAAAAAAAAAAAAAAAAAANSTDWiilPD9TkTFvhv0jAHNqJZpdUUsO5oo7p5Hrdqt%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DPQtAxLzF2uSq1IjuQUm8yGdm42E%253D)
 
 ---
 
@@ -87,4 +87,4 @@
 
 | 레시피 생성 | 레시피 생성 중 |
 |--------------|-----------------|
-| ![레시피생성](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fda6NkO%2FbtsNmhAIuO2%2FmABrsa8UMnl2W1xIIqPec0%2Fimg.png) | ![레시피생성중](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FUqQcd%2FbtsOUWB9j2n%2FAAAAAAAAAAAAAAAAAAAAAC5xK6yDRGoWYy7xZFN7VnAEIbsWH6j6YwEqGFqhM5pS%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DQ6mM8AWvNShL831VDE7yf8qiPiU%253D.png) |
+| ![레시피생성](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fda6NkO%2FbtsNmhAIuO2%2FmABrsa8UMnl2W1xIIqPec0%2Fimg.png) | ![레시피생성중](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FUqQcd%2FbtsOUWB9j2n%2FAAAAAAAAAAAAAAAAAAAAAC5xK6yDRGoWYy7xZFN7VnAEIbsWH6j6YwEqGFqhM5pS%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DQ6mM8AWvNShL831VDE7yf8qiPiU%253D) |
