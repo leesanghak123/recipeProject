@@ -2,9 +2,9 @@ package com.sang.recipe.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.ReactiveSecurityContextHolder;
+//import org.springframework.security.core.context.SecurityContext;
+//import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,11 +41,11 @@ public class AiController {
         System.out.println("[컨트롤러] Content-Type: " + httpRequest.getContentType());
 
         // 현재 스레드의 SecurityContext 조회
-        SecurityContext securityContext = SecurityContextHolder.getContext();
+        //SecurityContext securityContext = SecurityContextHolder.getContext();
 
         // aiService 호출 후, Reactor 체인에 SecurityContext를 주입
         return aiService.ai요리(request, principalDetail)
-                .contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)))
+                //.contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)))
                 .map(response -> {
                     System.out.println("[컨트롤러] 받은 응답: " + response);
                     return ResponseEntity.ok(response);
