@@ -70,12 +70,12 @@
 ---
 
 ## 📦 아키텍처
-![architecture](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FZR2TA%2FbtsOXHKaAl6%2FAAAAAAAAAAAAAAAAAAAAAAw66iz48vwpqc0i_vDUxpHEe0uPc7CVqFwDfbSttlUD%2Fimg.png)
+![architecture](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/sD6d6/btsNlW4GgCc/R9VRHMBtsEO7UOJgiqKC2K/img.png)
 
 ---
 
 ## 🗂️ ERD
-![ERD](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbrRfyq%2FbtsOlwW7VkN%2FAAAAAAAAAAAAAAAAAAAAANSTDWiilPD9TkTFvhv0jAHNqJZpdUUsO5oo7p5Hrdqt%2Fimg.png)
+![ERD](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dna/ZR2TA/btsOXHKaAl6/AAAAAAAAAAAAAAAAAAAAAAw66iz48vwpqc0i_vDUxpHEe0uPc7CVqFwDfbSttlUD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1751295599&allow_ip=&allow_referer=&signature=iZE1dQiqQlizRRRwP3MWNQiB6fA%3D.png)
 
 ---
 
