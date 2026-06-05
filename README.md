@@ -1,28 +1,9 @@
-# 🍳 AI 레시피 추천 & 요리 커뮤니티 웹 애플리케이션
+# 🍳 요리 커뮤니티 플랫폼
 
-냉장고 속 재료와 유통기한 정보를 기반으로,  
-**AI가 현실성 있는 레시피를 추천**하고  
-**사용자 간 레시피 공유 및 소통**이 가능한 웹 애플리케이션입니다.
-
----
-
-## 📌 프로젝트 개요
-
-| 항목 | 내용 |
-|------|------|
-| **프로젝트명** | Recipe App |
-| **목표** | 재료 기반 AI 레시피 추천 + 커뮤니티 기능 제공 |
-| **작업 기간** | 2024.09 ~ 2025.01 |
-| **인원 구성** | 개인 프로젝트 (1명) |
-| **저장소** | [GitHub](https://github.com/leesanghak123/recipeProject) |
-
----
-
-## 🎯 개발 목적
-
-- 냉장고 속 재료를 효율적으로 소비하고 음식물 쓰레기를 줄이기 위해 설계  
-- **RAG 기반 AI**를 활용해 잘못된 정보(환각 현상)를 줄이고 현실성 있는 레시피 제공  
-- 커뮤니티형 게시판을 통한 사용자 간 소통 공간 마련  
+급증하는 1인 가구의 가장 큰 고민 중 하나는 요리 후 남겨지는 '자투리 식재료'의 처리입니다.
+본 서비스는 이러한 식재료 낭비 문제를 해결하기 위해 기획된 웹 애플리케이션입니다.
+냉장고 속 재료를 입력하면 AI가 즉석에서 활용 가능한 현실성 있는 레시피를 제안하며,
+사용자 간의 레시피 공유 및 소통 기능을 제공하여 자취생과 1인 가구가 함께 식문화를 만들어가는 커뮤니티 공간을 지향합니다.
 
 ---
 
@@ -30,7 +11,7 @@
 
 ### 📌 Backend
 - **Spring Boot** `3.3.4`
-- **Spring Security** `6.3.3` (JWT)
+- **Spring Security** `6.3.3`
 - **Spring Data JPA**
 - **MySQL**
 - **FastAPI** `0.115.6`
@@ -40,42 +21,6 @@
 
 ### 💻 Frontend
 - **Vue.js** `3.2.13`
-
----
-
-## 🔐 인증 및 보안
-- Spring Security + JWT 기반 인증/인가
-- CSRF, CORS 보안 설정
-- 게시판 권한 제어
-
----
-
-## ⚙️ 성능 최적화 & 문제 해결
-
-### 1. RAG 적용 (정확도 향상)
-- **상황**: 단순 LLM 호출 시 부정확한 레시피 제안 발생 (환각 현상)
-- **접근**: Faiss + LangChain 기반 RAG 적용, 사전 DB 검색 후 LLM 응답
-- **결과**: 잘못된 추천 감소, 현실성 있는 레시피 제공
-
-### 2. 비동기 요청 처리 (응답 지연 개선)
-- **상황**: AI API 호출 시 2~4초 지연 발생
-- **접근**: Spring Boot & FastAPI에서 `WebClient` + `@Async` 비동기 처리, Timeout 설정
-- **결과**: 대량 트래픽 시 처리 성능 **900% 개선** (JMeter 부하 테스트 기준)
-
-### 3. JPA N+1 문제 해결
-- **상황**: 게시글 조회 시 연관 관계로 인한 쿼리 폭증
-- **접근**: `Fetch Join` + `Batch Size` 적용
-- **결과**: 동일 요청 시 쿼리 수 대폭 감소, 조회 성능 향상
-
----
-
-## 📦 아키텍처
-![architecture](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https://blog.kakaocdn.net/dn/sD6d6/btsNlW4GgCc/R9VRHMBtsEO7UOJgiqKC2K/img.png)
-
----
-
-## 🗂️ ERD
-![ERD](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FbrRfyq%2FbtsOlwW7VkN%2FAAAAAAAAAAAAAAAAAAAAANSTDWiilPD9TkTFvhv0jAHNqJZpdUUsO5oo7p5Hrdqt%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1756652399%26allow_ip%3D%26allow_referer%3D%26signature%3D5GXvYXgr9GZtf1BaZeh8ez%252BnSG0%253D)
 
 ---
 
@@ -96,13 +41,45 @@
 ---
 
 ### 🧠 AI 레시피 생성
-| 레시피 생성 | 레시피 생성 중 |
-|--------------|-----------------|
-| ![레시피생성](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fda6NkO%2FbtsNmhAIuO2%2FmABrsa8UMnl2W1xIIqPec0%2Fimg.png) | ![레시피생성중](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FUqQcd%2FbtsOUWB9j2n%2FAAAAAAAAAAAAAAAAAAAAAC5xK6yDRGoWYy7xZFN7VnAEIbsWH6j6YwEqGFqhM5pS%2Fimg.png) |
+| 레시피 생성 |
+|--------------|
+| ![레시피생성](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fda6NkO%2FbtsNmhAIuO2%2FmABrsa8UMnl2W1xIIqPec0%2Fimg.png) |
 
 ---
 
-## 📝 배운 점
-- RAG 구조를 활용한 AI 서비스 정확도 개선 경험
-- 비동기 요청 처리로 서비스 응답 속도 및 안정성 확보
-- JPA 성능 최적화 기법(Fetch Join, Batch Size) 실전 적용
+## 📦 아키텍처
+![architecture](https://github.com/user-attachments/assets/37845c3a-e52a-4d6f-9922-cf44979cc12b)
+
+---
+
+## 🎯 주요 기능
+
+### 🔐 인증 및 보안
+- 로그인: Spring Security + JWT 기반 인증/인가
+
+### 커뮤니티
+- 게시글: 추천, 조회수, 이미지 업로드, 글자 커스텀 지원
+- 댓글: 계층형 댓글 지원
+
+### 레시피 콘텐츠
+- 레시피 추천: AI기반 레시피 추천
+- 커뮤니티: 게시글을 통해 음식 얘기를 나눌 수 있는 공간 지원
+
+---
+
+## ⚙️ 핵심 구현
+
+### 1. RAG(Retrieval-Augmented Generation) 시스템 구축을 통한 LLM 답변 신뢰도 향상
+- **Problem**: 단순 LLM 호출 시 LLM의 환각 현상과 최신 데이터 부재 문제 발생
+- **Action**: 문제를 해결하기 위해 선택지 후보인 ML, 파인튜닝, RAG 중에서 ML/파인 튜닝과 달리 RAG는 모델을 재학습시킬 필요가 없고 Vector DB에 새 데이터를 추가하기만 하면, 다음 검색 때 바로 인덱싱되어 LLM의 컨텍스트로 주입되므로 실시간 데이터 반영에 가장 유리하기에 진입 장벽이 낮고 쉬운 솔루션이라고 판단.
+- **Result**: Vector DB 기반 컨텍스트 주입으로, 검증된 레시피 데이터를 기반으로 한 답변 생성 구조 구현
+
+### 2. 비동기 요청 처리 (응답 지연 개선)
+- **Problem**: 외부 AI API 호출 지연(2~4초)으로 인해 동기 방식에서 Tomcat 스레드 블로킹 및 동시성 병목 가능성 발생
+- **Action**: 기존 동기식 RestTemplate을 걷어내고 리액티브 스택인 WebClient를 도입하여 외부 AI 서버와의 통신을 비동기 논블로킹으로 전환. 외부 AI 서버의 장애가 내부 시스템으로 번지는 것을 막기 위해 타임아웃 설정을 적용
+- **Result**: JMeter 기반 로컬 부하 테스트 결과, 동기 방식 대비 평균 응답 속도가 약 9배 개선됨을 확인
+
+### 3. JPA N+1 문제 해결
+- **Problem**: 게시글 조회 시 OneToMany 관계에서 연관된 데이터를 가져오기 위한 추가 쿼리가 N번만큼 발생하는 JPA N+1 문제를 식별
+- **Action**: Fetch Join 및 Batch Size 최적화 전략을 병행 수립
+- **Result**: 수십 번 분할되어 무분별하게 발생하던 DB 조회 쿼리를 단 1~2회의 쿼리로 압축, 대량 데이터 조회 시 발생하는 데이터베이스 I/O 병목을 제거함으로써, API 응답 속도를 개선하고 DB 서버의 CPU 자원 효율성을 대폭 끌어올림
